@@ -1,8 +1,9 @@
-const ListContent = ({ todos, setTodos, filter }) => {
+const ListContent = ({ todos, setTodos, filter, setCount, count }) => {
   // This section should be hidden by default and shown when there are todos
 
   const inputHandler = (idx) => {
     const { isComplete, id } = todos[idx];
+    setCount(count - 1);
     setTodos(
       todos.map((item) => {
         if (item.id === id) {
@@ -15,6 +16,8 @@ const ListContent = ({ todos, setTodos, filter }) => {
       })
     );
   };
+
+  const destroyTodo = () => {};
 
   return (
     todos.length !== 0 && (
@@ -45,7 +48,12 @@ const ListContent = ({ todos, setTodos, filter }) => {
                     onChange={() => inputHandler(idx)}
                   />
                   <label>{todo.name}</label>
-                  <button className="destroy" />
+                  <button
+                    onClick={() => {
+                      destroyTodo();
+                    }}
+                    className="destroy"
+                  />
                 </div>
               </li>
             ) : null;

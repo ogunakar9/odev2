@@ -8,6 +8,7 @@ import ListContent from "./components/ListContent";
 function App() {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState(null);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     console.log(todos);
@@ -17,12 +18,20 @@ function App() {
     <>
       <div className="todoapp">
         <Header setTodos={setTodos} todos={todos} />
-        <ListContent todos={todos} setTodos={setTodos} filter={filter} />
+        <ListContent
+          todos={todos}
+          setTodos={setTodos}
+          filter={filter}
+          count={count}
+          setCount={setCount}
+        />
         <Footer
           filter={filter}
           setFilter={setFilter}
           setTodos={setTodos}
           todos={todos}
+          count={count}
+          setCount={setCount}
         />
       </div>
       <Info />
