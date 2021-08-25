@@ -50,27 +50,6 @@ const ListContent = ({ todos, setTodos, filter }) => {
               </li>
             ) : null;
           })}
-          {/*<li className="completed">*/}
-          {/*  <div className="view">*/}
-          {/*    <input className="toggle" type="checkbox" />*/}
-          {/*    <label>Learn JavaScript</label>*/}
-          {/*    <button className="destroy" />*/}
-          {/*  </div>*/}
-          {/*</li>*/}
-          {/*<li>*/}
-          {/*  <div className="view">*/}
-          {/*    <input className="toggle" type="checkbox" />*/}
-          {/*    <label>Learn React</label>*/}
-          {/*    <button className="destroy" />*/}
-          {/*  </div>*/}
-          {/*</li>*/}
-          {/*<li>*/}
-          {/*  <div className="view">*/}
-          {/*    <input className="toggle" type="checkbox" />*/}
-          {/*    <label>Have a life!</label>*/}
-          {/*    <button className="destroy" />*/}
-          {/*  </div>*/}
-          {/*</li>*/}
         </ul>
       </section>
     )

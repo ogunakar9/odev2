@@ -18,7 +18,12 @@ function App() {
       <div className="todoapp">
         <Header setTodos={setTodos} todos={todos} />
         <ListContent todos={todos} setTodos={setTodos} filter={filter} />
-        <Footer filter={filter} setFilter={setFilter} />
+        <Footer
+          filter={filter}
+          setFilter={setFilter}
+          setTodos={setTodos}
+          todos={todos}
+        />
       </div>
       <Info />
     </>

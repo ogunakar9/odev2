@@ -1,6 +1,14 @@
 import React from "react";
 
-const Footer = ({ filter, setFilter }) => {
+const Footer = ({ filter, setFilter, setTodos, todos }) => {
+  const clearCompleted = () => {
+    setTodos(
+      todos.filter((el) => {
+        return el.isComplete === false;
+      })
+    );
+  };
+
   return (
     <footer className="footer">
       {/*// This should be `0 items left` by default */}
@@ -13,7 +21,7 @@ const Footer = ({ filter, setFilter }) => {
         <li>
           <button
             onClick={() => setFilter(null)}
-            className={filter === null && "selected"}
+            className={filter === null ? "selected" : null}
           >
             All
           </button>
@@ -27,7 +35,9 @@ const Footer = ({ filter, setFilter }) => {
       </ul>
 
       {/*Hidden if no completed items are left ↓ */}
-      <button className="clear-completed">Clear completed</button>
+      <button onClick={() => clearCompleted()} className="clear-completed">
+        Clear completed
+      </button>
     </footer>
   );
 };
