@@ -1,5 +1,12 @@
+import { useState } from "react";
 const ListContent = ({ todos }) => {
   // This section should be hidden by default and shown when there are todos
+  const [checkbox, setCheckbox] = useState(true);
+
+  const inputHandler = () => {
+    setCheckbox(!checkbox);
+  };
+
   return (
     todos.length !== 0 && (
       <section className="main">
@@ -10,7 +17,12 @@ const ListContent = ({ todos }) => {
             return (
               <li key={idx}>
                 <div className="view">
-                  <input className="toggle" type="checkbox" />
+                  <input
+                    className="toggle"
+                    type="checkbox"
+                    value={checkbox}
+                    onChange={inputHandler}
+                  />
                   <label>{todo}</label>
                   <button className="destroy" />
                 </div>
