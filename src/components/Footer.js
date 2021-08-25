@@ -9,11 +9,18 @@ const Footer = ({ filter, setFilter, setTodos, todos }) => {
     );
   };
 
+  let count = 0;
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].isComplete === false) {
+      count++;
+    }
+  }
+
   return (
     <footer className="footer">
       {/*// This should be `0 items left` by default */}
       <span className="todo-count">
-        <strong>2</strong>
+        <strong>{count} </strong>
         items left
       </span>
 
