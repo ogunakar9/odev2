@@ -3,31 +3,28 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="footer">
-
       {/*// This should be `0 items left` by default */}
       <span className="todo-count">
-			<strong>2</strong>
-			items left
-		</span>
+        <strong>2</strong>
+        items left
+      </span>
 
       <ul className="filters">
         <li>
-          <a className="selected">All</a>
+          <button className="selected">All</button>
         </li>
         <li>
-          <a>Active</a>
+          <button>Active</button>
         </li>
         <li>
-          <a>Completed</a>
+          <button>Completed</button>
         </li>
       </ul>
 
-       {/*Hidden if no completed items are left ↓ */}
-      <button className="clear-completed">
-        Clear completed
-      </button>
+      {/*Hidden if no completed items are left ↓ */}
+      <button className="clear-completed">Clear completed</button>
     </footer>
   );
-}
+};
 
 export default Footer;
