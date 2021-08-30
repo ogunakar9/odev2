@@ -15,7 +15,12 @@ const Header = ({ setTodos, todos }) => {
   };
 
   const onChangeInput = (e) => {
-    setValue({ name: e.target.value, isComplete: false, id: id });
+    setValue({
+      name: e.target.value,
+      isComplete: false,
+      id: id,
+      isEditing: false,
+    });
   };
 
   return (

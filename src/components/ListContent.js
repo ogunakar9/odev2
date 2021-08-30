@@ -16,6 +16,21 @@ const ListContent = ({ todos, setTodos, filter }) => {
     );
   };
 
+  const editTodo = (idx) => {
+    const { isEditing, id } = todos[idx];
+    setTodos(
+      todos.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            isEditing: !isEditing,
+          };
+        }
+        return item;
+      })
+    );
+  };
+
   const destroyTodo = (idx) => {
     const { id } = todos[idx];
     setTodos(todos.filter((item) => item.id !== id));
@@ -49,7 +64,12 @@ const ListContent = ({ todos, setTodos, filter }) => {
                     checked={todo.isComplete}
                     onChange={() => inputHandler(idx)}
                   />
-                  <label>{todo.name}</label>
+                  <label
+                    className={todo.isEditing ? "editor" : null}
+                    onClick={() => editTodo(idx)}
+                  >
+                    {todo.name}
+                  </label>
                   <button
                     onClick={() => {
                       destroyTodo(idx);
