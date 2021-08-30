@@ -16,7 +16,10 @@ const ListContent = ({ todos, setTodos, filter }) => {
     );
   };
 
-  const destroyTodo = () => {};
+  const destroyTodo = (idx) => {
+    const { id } = todos[idx];
+    setTodos(todos.filter((item) => item.id !== id));
+  };
 
   return (
     todos.length !== 0 && (
@@ -49,7 +52,7 @@ const ListContent = ({ todos, setTodos, filter }) => {
                   <label>{todo.name}</label>
                   <button
                     onClick={() => {
-                      destroyTodo();
+                      destroyTodo(idx);
                     }}
                     className="destroy"
                   />
