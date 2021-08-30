@@ -11,27 +11,25 @@ function App() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.log(todos);
+    let c = todos.reduce(
+      (accumulator, current) => accumulator + (current.isComplete ? 0 : 1),
+      0
+    );
+
+    setCount(c);
   }, [todos]);
 
   return (
     <>
       <div className="todoapp">
         <Header setTodos={setTodos} todos={todos} />
-        <ListContent
-          todos={todos}
-          setTodos={setTodos}
-          filter={filter}
-          count={count}
-          setCount={setCount}
-        />
+        <ListContent todos={todos} setTodos={setTodos} filter={filter} />
         <Footer
           filter={filter}
           setFilter={setFilter}
           setTodos={setTodos}
           todos={todos}
           count={count}
-          setCount={setCount}
         />
       </div>
       <Info />

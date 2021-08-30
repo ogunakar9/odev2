@@ -1,9 +1,8 @@
-const ListContent = ({ todos, setTodos, filter, setCount, count }) => {
+const ListContent = ({ todos, setTodos, filter }) => {
   // This section should be hidden by default and shown when there are todos
 
   const inputHandler = (idx) => {
     const { isComplete, id } = todos[idx];
-    setCount(count - 1);
     setTodos(
       todos.map((item) => {
         if (item.id === id) {

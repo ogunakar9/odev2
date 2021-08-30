@@ -1,22 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-const Footer = ({ filter, setFilter, setTodos, todos, count, setCount }) => {
-  useEffect(() => {
-    todos.reduce((setCount, count, i) => {
-      return todos[i].isComplete ? null : setCount(count + 1);
-    }, count);
-    // for (let i = 0; i < todos.length; i++) {
-    //   if (todos[i].isComplete === false) {
-    //     setCount(count + 1);
-    //   }
-    // }
-  }, []);
-  //TODO: fix count state using reduce function
+const Footer = ({ filter, setFilter, setTodos, todos, count }) => {
   const clearCompleted = () => {
     setTodos(
       todos.filter((el) => {
         if (el.isComplete === false) {
-          setCount(count - 1);
           return el;
         }
         return null;
