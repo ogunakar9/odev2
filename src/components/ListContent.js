@@ -38,7 +38,7 @@ const ListContent = ({ todos, setTodos, filter }) => {
             }
             //filter off
             return show ? (
-              <li key={idx}>
+              <li key={idx} className={todo.isComplete ? "completed" : null}>
                 <div className="view">
                   <input
                     className="toggle"
