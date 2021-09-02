@@ -1,4 +1,4 @@
-// import { useState, useEffect } from "react";
+import { useState } from "react";
 const ListContent = ({ todos, setTodos, filter }) => {
   // This section should be hidden by default and shown when there are todos
 
@@ -15,6 +15,26 @@ const ListContent = ({ todos, setTodos, filter }) => {
         return item;
       })
     );
+  };
+
+  const inputHandleAll = () => {
+    let remaining = todos.reduce(
+      (acc, cur) => acc + (cur.isComplete ? 0 : 1),
+      0
+    );
+    if (remaining > 0) {
+      for (let i = 0; i < todos.length; i++) {
+        if (!todos[i].isComplete) {
+          todos[i].isComplete = true;
+        }
+      }
+      setAllChecked(true);
+    } else if (remaining === 0) {
+      for (let i = 0; i < todos.length; i++) {
+        todos[i].isComplete = false;
+      }
+      setAllChecked(false);
+    }
   };
 
   const editTodo = (idx) => {
@@ -59,10 +79,16 @@ const ListContent = ({ todos, setTodos, filter }) => {
   //   setValue({ name: "" });
   // }, [todos]);
 
+  const [allChecked, setAllChecked] = useState(false);
   return (
     todos.length !== 0 && (
       <section className="main">
-        <input className="toggle-all" type="checkbox" />
+        <input
+          className="toggle-all"
+          type="checkbox"
+          checked={allChecked}
+          onChange={() => inputHandleAll()}
+        />
         <label htmlFor="toggle-all">Mark all as complete</label>
         <ul className="todo-list">
           {todos.map((todo, idx) => {
