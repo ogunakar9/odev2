@@ -16,7 +16,7 @@ const ListContent = ({ todos, setTodos, filter }) => {
       })
     );
   };
-
+  //TODO: this function should use setTodos instead of manual change
   const inputHandleAll = () => {
     let remaining = todos.reduce(
       (acc, cur) => acc + (cur.isComplete ? 0 : 1),
@@ -89,7 +89,9 @@ const ListContent = ({ todos, setTodos, filter }) => {
           checked={allChecked}
           onChange={() => inputHandleAll()}
         />
-        <label htmlFor="toggle-all">Mark all as complete</label>
+        <label htmlFor="toggle-all" onClick={() => inputHandleAll()}>
+          Mark all as complete
+        </label>
         <ul className="todo-list">
           {todos.map((todo, idx) => {
             let show = true;
