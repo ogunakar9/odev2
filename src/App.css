@@ -418,7 +418,6 @@ html .clear-completed:active {
   margin: 0 0 0 43px !important;
   border: 1px solid #999 !important;
   box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2) !important;
-  background-image: none;
 }
 
 .mv-item-bar,

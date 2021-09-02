@@ -1,3 +1,4 @@
+// import { useState, useEffect } from "react";
 const ListContent = ({ todos, setTodos, filter }) => {
   // This section should be hidden by default and shown when there are todos
 
@@ -36,6 +37,28 @@ const ListContent = ({ todos, setTodos, filter }) => {
     setTodos(todos.filter((item) => item.id !== id));
   };
 
+  // const onSubmitForm = (e) => {
+  //   e.preventDefault();
+  //   setTodos([...todos, value]);
+  //   setId(id + 1);
+  // };
+  //
+  // const onChangeInput = (e) => {
+  //   setValue({
+  //     name: e.target.value,
+  //     isComplete: false,
+  //     id: id,
+  //     isEditing: false,
+  //   });
+  // };
+  //
+  // const [value, setValue] = useState({ name: "" });
+  // const [id, setId] = useState(0);
+
+  // useEffect(() => {
+  //   setValue({ name: "" });
+  // }, [todos]);
+
   return (
     todos.length !== 0 && (
       <section className="main">
@@ -58,24 +81,28 @@ const ListContent = ({ todos, setTodos, filter }) => {
             return show ? (
               <li key={idx} className={todo.isComplete ? "completed" : null}>
                 <div className="view">
-                  <input
-                    className="toggle"
-                    type="checkbox"
-                    checked={todo.isComplete}
-                    onChange={() => inputHandler(idx)}
-                  />
+                  {todo.isEditing ? null : (
+                    <input
+                      className="toggle"
+                      type="checkbox"
+                      checked={todo.isComplete}
+                      onChange={() => inputHandler(idx)}
+                    />
+                  )}
                   <label
                     className={todo.isEditing ? "editor" : null}
                     onClick={() => editTodo(idx)}
                   >
                     {todo.name}
                   </label>
-                  <button
-                    onClick={() => {
-                      destroyTodo(idx);
-                    }}
-                    className="destroy"
-                  />
+                  {todo.isEditing ? null : (
+                    <button
+                      onClick={() => {
+                        destroyTodo(idx);
+                      }}
+                      className="destroy"
+                    />
+                  )}
                 </div>
               </li>
             ) : null;
