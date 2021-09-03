@@ -30,16 +30,24 @@ const ListContent = ({ todos, setTodos, filter }) => {
   };
 
   const editTodo = (idx) => {
-    const { isEditing, id } = todos[idx];
+    const { id } = todos[idx];
     setTodos(
       todos.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            isEditing: !isEditing,
-          };
-        }
-        return item;
+        return {
+          ...item,
+          isEditing: item.id === id,
+        };
+      })
+    );
+  };
+
+  const cancelEdits = () => {
+    setTodos(
+      todos.map((item) => {
+        return {
+          ...item,
+          isEditing: false,
+        };
       })
     );
   };
@@ -49,29 +57,25 @@ const ListContent = ({ todos, setTodos, filter }) => {
     setTodos(todos.filter((item) => item.id !== id));
   };
 
-  // const onSubmitForm = (e) => {
-  //   e.preventDefault();
-  //   setTodos([...todos, value]);
-  //   setId(id + 1);
-  // };
-  //
-  // const onChangeInput = (e) => {
-  //   setValue({
-  //     name: e.target.value,
-  //     isComplete: false,
-  //     id: id,
-  //     isEditing: false,
-  //   });
-  // };
-  //
-  // const [value, setValue] = useState({ name: "" });
-  // const [id, setId] = useState(0);
+  const onEditInput = (e, id) => {
+    setEditText(e.target.value);
 
-  // useEffect(() => {
-  //   setValue({ name: "" });
-  // }, [todos]);
+    setTodos(
+      todos.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            name: e.target.value,
+          };
+        }
+        return item;
+      })
+    );
+  };
 
   const [allChecked, setAllChecked] = useState(false);
+  const [editText, setEditText] = useState("");
+
   return (
     todos.length !== 0 && (
       <section className="main">
@@ -109,12 +113,28 @@ const ListContent = ({ todos, setTodos, filter }) => {
                       onChange={() => inputHandler(idx)}
                     />
                   )}
-                  <label
-                    className={todo.isEditing ? "editor" : null}
-                    onClick={() => editTodo(idx)}
-                  >
-                    {todo.name}
-                  </label>
+                  {todo.isEditing ? (
+                    <input
+                      className="editor"
+                      value={editText}
+                      onChange={(e) => {
+                        setEditText(e.target.value);
+                        onEditInput(e, idx);
+                      }}
+                      onKeyDown={(e) =>
+                        e.key === "Enter" ? cancelEdits() : null
+                      }
+                    />
+                  ) : (
+                    <label
+                      onClick={() => {
+                        setEditText(todo.name);
+                        editTodo(idx);
+                      }}
+                    >
+                      {todo.name}
+                    </label>
+                  )}
                   {todo.isEditing ? null : (
                     <button
                       onClick={() => {
