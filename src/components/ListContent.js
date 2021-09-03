@@ -16,25 +16,17 @@ const ListContent = ({ todos, setTodos, filter }) => {
       })
     );
   };
-  //TODO: this function should use setTodos instead of manual change
+
   const inputHandleAll = () => {
-    let remaining = todos.reduce(
-      (acc, cur) => acc + (cur.isComplete ? 0 : 1),
-      0
+    setTodos(
+      todos.map((item) => {
+        return {
+          ...item,
+          isComplete: !allChecked,
+        };
+      })
     );
-    if (remaining > 0) {
-      for (let i = 0; i < todos.length; i++) {
-        if (!todos[i].isComplete) {
-          todos[i].isComplete = true;
-        }
-      }
-      setAllChecked(true);
-    } else if (remaining === 0) {
-      for (let i = 0; i < todos.length; i++) {
-        todos[i].isComplete = false;
-      }
-      setAllChecked(false);
-    }
+    setAllChecked(!allChecked);
   };
 
   const editTodo = (idx) => {
