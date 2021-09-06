@@ -41,9 +41,16 @@ const ListContent = ({ todos, setTodos, filter }) => {
     );
   };
 
-  const cancelEdits = () => {
+  const editingDone = (id) => {
     setTodos(
       todos.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            name: editText,
+            isEditing: false,
+          };
+        }
         return {
           ...item,
           isEditing: false,
@@ -55,22 +62,6 @@ const ListContent = ({ todos, setTodos, filter }) => {
   const destroyTodo = (idx) => {
     const { id } = todos[idx];
     setTodos(todos.filter((item) => item.id !== id));
-  };
-
-  const onEditInput = (e, id) => {
-    setEditText(e.target.value);
-
-    setTodos(
-      todos.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            name: e.target.value,
-          };
-        }
-        return item;
-      })
-    );
   };
 
   const [allChecked, setAllChecked] = useState(false);
@@ -115,15 +106,14 @@ const ListContent = ({ todos, setTodos, filter }) => {
                   )}
                   {todo.isEditing ? (
                     <input
+                      autoFocus
+                      onBlur={() => editingDone(todo.id)}
                       className="editor"
                       value={editText}
                       onChange={(e) => {
                         setEditText(e.target.value);
-                        onEditInput(e, idx);
                       }}
-                      onKeyDown={(e) =>
-                        e.key === "Enter" ? cancelEdits() : null
-                      }
+                      onFocus={(e) => e.target.select()}
                     />
                   ) : (
                     <label
